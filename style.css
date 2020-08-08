@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-gradient-top-bottom: linear-gradient(180deg, hsl(236, 72%, 79%), hsl(237, 63%, 64%));
+  --primary-gradient-left-right: linear-gradient(90deg, hsl(236, 72%, 79%), hsl(237, 63%, 64%));
+
+  --primary-bg: hsl(240, 78%, 98%);
+  --secondary-bg: hsl(234, 14%, 74%);
+  --secondary-txt-clr: hsl(233, 13%, 49%);
+  --primary-txt-clr: hsl(232, 13%, 33%);
+  --shadow-clr: hsl(234, 20%, 90%);
+}
+
+body {
+  color: var(--primary-txt-clr);
+  font-size: 16px;
+  font-family: 'Montserrat', Verdana, sans-serif;
+  text-align: center;
+  min-height: 100vh;
+  background-color: var(--primary-bg);
+  position: relative;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+body::before {
+  background: url('img/bg-top.svg') no-repeat;
+  background-size: 60%;
+  background-position: 175% -5%;
+}
+
+body::after {
+  background: url('img/bg-bottom.svg') no-repeat;
+  background-size: 45%;
+  background-position: 0% 100%;
+}
+
+.main-container {
+  padding: 2rem 1.5rem;
+}
+
+.header .main-title {
+  font-size: 1.65rem;
+  color: var(--secondary-txt-clr);
+  margin-bottom: 2rem;
+}
+
+.price-toggle-container {
+  color: var(--secondary-bg);
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-toggle-container .lead.selected {
+  color: var(--secondary-txt-clr);
+}
+
+.price-toggle-container .toggle {
+  width: 3rem;
+  height: 1.5rem;
+  margin: 0 1rem;
+}
+
+#price-toggle {
+  display: none;
+}
+
+#price-toggle-label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+#price-toggle-label::after {
+  content: '';
+  width: 3rem;
+  height: 1.5rem;
+  border-radius: 1rem;
+  background-image: var(--primary-gradient-left-right);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+#price-toggle-label::before {
+  content: '';
+  width: calc(1.5rem - 6px);
+  height: calc(1.5rem - 6px);
+  border-radius: 50%;
+  background-color: var(--primary-bg);
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  z-index: 2;
+  transition: left 150ms ease-in;
+}
+
+#price-toggle:checked ~ #price-toggle-label::before {
+  left: calc(1.5rem + 3px);
+}
+
+.price-card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-card {
+  background: #fff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 2rem 0 var(--shadow-clr);
+}
+
+.price-card .card-header .price {
+  font-size: 2rem;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-card .card-header .price span {
+  font-size: 3rem;
+  margin-left: 0.25rem;
+}
+
+.price-card .features {
+  border-top: 1px solid var(--secondary-bg);
+  margin-bottom: 1.5rem;
+}
+
+.price-card .features > p {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--shadow-clr);
+}
+
+.price-card .btn {
+  color: var(--primary-bg);
+  font-size: 0.86em;
+  font-weight: 700;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #fff;
+  border-radius: 0.25rem;
+  background-image: var(--primary-gradient-left-right);
+  cursor: pointer;
+}
+
+.price-card .btn:hover {
+  color: var(--secondary-txt-clr);
+  background: transparent;
+  border: 1px solid var(--secondary-txt-clr);
+}
+
+.price-card.recommended {
+  color: var(--primary-bg);
+  background-image: var(--primary-gradient-top-bottom);
+}
+
+.price-card.recommended .features {
+  border-top: 1px solid var(--shadow-clr);
+}
+
+.price-card.recommended .features > p {
+  border-bottom: 1px solid var(--secondary-bg);
+}
+
+.price-card.recommended .btn {
+  color: var(--secondary-txt-clr);
+  border: 1px solid #fff;
+  background: #fff;
+}
+
+.price-card.recommended .btn:hover {
+  color: var(--primary-bg);
+  background: transparent;
+  border: 1px solid #fff;
+}
+
+@media (min-width: 780px) {
+  .price-card-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .price-card {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .price-card .btn {
+    padding: 0.5rem;
+  }
+
+  .price-card.recommended {
+    margin: 0 0.5rem;
+    box-shadow: initial;
+    transform-origin: center bottom;
+    transform: scale(1.1)
+  }
+}
